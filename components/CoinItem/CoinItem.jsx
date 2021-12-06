@@ -10,9 +10,12 @@ const CoinItem = ({ coin }) => {
     <View style={styles.container}>
       <View style={styles.coinName}>
         <Image style={styles.image} source={{ uri: coin.image }} />
-        <View style={styles.contentNames}>
-          <Text style={styles.text}>{coin.name}</Text>
-          <Text style={styles.textSymbol}>{coin.symbol}</Text>
+        <View>
+          <Text style={{ color: "#fff", fontWeight:"bold", fontSize:18 }}>{coin.name}</Text>
+          <View style={{flexDirection:"row", alignItems:"center"}}>
+            <Text style={styles.rank}>{coin.market_cap_rank}</Text>
+            <Text style={styles.textSymbol}>{coin.symbol}</Text>
+          </View>
         </View>
       </View>
 
