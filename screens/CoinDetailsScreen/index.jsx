@@ -64,6 +64,7 @@ const CoinDetailsScreen = () => {
           symbol={symbol}
           market_data={market_cap_rank}
         />
+
         <View style={{padding: 15}}>
           <View style={styles.currentPriceContent}>
             <View>
@@ -90,12 +91,13 @@ const CoinDetailsScreen = () => {
             </View>
           </View>
           
+          {/* Chart */}
           <View>
             <ChartPath strokeWidth={2} height={WIDTH / 2} stroke={chartColor} width={WIDTH} />
             <ChartDot style={{ backgroundColor: chartColor }} />
-          </View>
+          </View>  
           
-          
+          {/* Inputs */}
           <View style={{flexDirection:"row"}}>
             <View style={{flexDirection:"row", flex:1, justifyContent:"center", alignItems:"center"}}>
               <Text style={{ color:"white" }}>{symbol.toUpperCase()}</Text>
