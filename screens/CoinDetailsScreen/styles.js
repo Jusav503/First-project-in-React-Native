@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   coinPrice: {
     fontWeight: "bold",
-    fontSize: 50,
+    fontSize: 40,
     color: "white",
   },
   coinPercentage: {

@@ -54,20 +54,20 @@ const CoinDetailsScreen = () => {
   const formatCurrency = (value) => {
     "worklet";
     if (value === "") {
-      return `€${current_price.eur.toFixed(3)}`;
+      return `€${current_price.eur.toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    return `€${parseFloat(value).toFixed(3)}`;
+    return `€${parseFloat(value).toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
   const changeCoinValue = (value) => {
     // console.warn(typeof value)
     setCoinValue(value);
-    const floatValue = parseFloat(value.replace(',', '.' )) || 0
+    const floatValue = parseFloat(value) || 0
     setEurValue((floatValue * current_price.eur).toString())
   };
   const changeEurValue = (value) => {
     setEurValue(value);
-    const floatValue = parseFloat(value.replace(',', '.' )) || 0
-    setCoinValue((floatValue / current_price.eur).toString())
+    const floatValue = parseFloat(value) || 0
+    setCoinValue((floatValue / current_price.eur.toFixed(2)).toString())
   };
 
   return (
@@ -118,10 +118,10 @@ const CoinDetailsScreen = () => {
           </View>  
           
           {/* Inputs */}
-          <View style={{flexDirection:"row", paddingTop: 10}}>
+          <View style={{flexDirection:"row", paddingTop: 10, justifyContent:"center", alignItems:"center"}}>
             <View style={{flexDirection:"row", flex:1, justifyContent:"center", alignItems:"center"}}>
               <Input
-                value={coinValue} 
+                value={coinValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
                 onChangeText={changeCoinValue}
                 keyboardType={"numeric"} 
                 inputContainerStyle={{width: 70}} 
@@ -129,15 +129,10 @@ const CoinDetailsScreen = () => {
                 inputStyle={{color:"white"}}
               />
             </View>
-          
+            <Text style={{ color:"white", fontSize:40, marginHorizontal:10}}>=</Text>
             <View style={{flexDirection:"row", flex:2, justifyContent:"center", alignItems:"center"}}>
-              <Input 
-                label="EUR"
-                value={eurValue.toString()} 
-                onChangeText={changeEurValue}
-                keyboardType={"numeric"}
-                inputStyle={{color:"white"}}
-              />
+              <Text style={{ color:"white", fontSize:30, marginRight:5}}>EUR</Text>
+              <Text style={{ color:"white", fontSize:30}}>{eurValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
             </View>
           </View>
         </View>
