@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  loading:{
+    flex:1,
+    justifyContent:"center",
+    alignItems: "center",
+   },
   currentPriceContent: {
     flexDirection: "row",
     alignItems: "center",
@@ -29,14 +34,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width:85
   },
-  input:{
-    borderWidth:1,
-    borderBottomColor:"white",
-    color: "white",
-    width: 100,
-    paddingLeft:10,
-    marginLeft:10
-  }
 });
 
 export default styles;

@@ -1,18 +1,15 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  list: { paddingHorizontal:10 },
-  title: { color: "#fff", fontSize: 20, padding:10, fontWeight:"bold" },
+  list: { paddingHorizontal: 10 },
+  title: { color: "#fff", fontSize: 20, padding: 10, fontWeight: "bold" },
   header: {
-    paddingHorizontal:10,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    paddingHorizontal: 10,
   },
   searchInput: {
-    color: "#fff",
-    borderBottomColor: "#696969",
-    borderBottomWidth: 1,
-    width: "35%",
+    backgroundColor: "#121212",
+    borderTopColor: "#121212",
+    borderBottomColor: "#121212",
   },
 });
 

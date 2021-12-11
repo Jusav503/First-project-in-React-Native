@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, TextInput } from "react-native";
+import { SearchBar } from "react-native-elements";
 
 import CoinItem from "../../components/CoinItem/CoinItem";
 import styles from "./styles";
 
 const HomeScreen = () => {
-
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
   const [refreshing, setRefreshing] = useState(false);
@@ -26,13 +26,13 @@ const HomeScreen = () => {
       {/* Search bar */}
       <View style={styles.header}>
         <Text style={styles.title}>JusavMarket</Text>
-        <TextInput
-          style={styles.searchInput}
+        <SearchBar
+          value={search}
           placeholder="Search"
-          placeholderTextColor="#858585"
-          onChangeText={(text) => setSearch(text)}
           autoCapitalize="none"
           autoCompleteType="off"
+          onChangeText={(text) => setSearch(text)}
+          containerStyle={styles.searchInput}
         />
       </View>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Dimensions, TextInput, ActivityIndicator } from "react-native";
+import { Input } from 'react-native-elements';
 import { AntDesign } from "@expo/vector-icons";
 import { ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from "@rainbow-me/animated-charts";
 import { useRoute } from "@react-navigation/native"
@@ -31,7 +32,7 @@ const CoinDetailsScreen = () => {
   }, []);
 
   if(loading || !coin || !coinMarketData){
-    return <ActivityIndicator size="large" />
+    return  <ActivityIndicator size="large" color="white" style={styles.loading} />
   }
 
   const {
@@ -53,9 +54,9 @@ const CoinDetailsScreen = () => {
   const formatCurrency = (value) => {
     "worklet";
     if (value === "") {
-      return `€${current_price.eur.toFixed(2)}`;
+      return `€${current_price.eur.toFixed(3)}`;
     }
-    return `€${parseFloat(value).toFixed(2)}`;
+    return `€${parseFloat(value).toFixed(3)}`;
   };
   const changeCoinValue = (value) => {
     // console.warn(typeof value)
@@ -112,20 +113,31 @@ const CoinDetailsScreen = () => {
           
           {/* Chart */}
           <View>
-            <ChartPath strokeWidth={2} height={WIDTH / 2} stroke={chartColor} width={WIDTH} />
+            <ChartPath strokeWidth={2} height={WIDTH / 2} stroke={chartColor} width={WIDTH / 1.1} />
             <ChartDot style={{ backgroundColor: chartColor }} />
           </View>  
           
           {/* Inputs */}
-          <View style={{flexDirection:"row"}}>
+          <View style={{flexDirection:"row", paddingTop: 10}}>
             <View style={{flexDirection:"row", flex:1, justifyContent:"center", alignItems:"center"}}>
-              <Text style={{ color:"white" }}>{symbol.toUpperCase()}</Text>
-              <TextInput style={styles.input} value={coinValue} keyboardType={"numeric"} onChangeText={changeCoinValue} />
+              <Input
+                value={coinValue} 
+                onChangeText={changeCoinValue}
+                keyboardType={"numeric"} 
+                inputContainerStyle={{width: 70}} 
+                label={symbol.toUpperCase()}
+                inputStyle={{color:"white"}}
+              />
             </View>
           
-            <View style={{flexDirection:"row", flex:1, justifyContent:"center", alignItems:"center"}}>
-              <Text style={{ color:"white" }}>Eur</Text>
-              <TextInput style={styles.input} value={eurValue.toString()} keyboardType={"numeric"} onChangeText={changeEurValue} />
+            <View style={{flexDirection:"row", flex:2, justifyContent:"center", alignItems:"center"}}>
+              <Input 
+                label="EUR"
+                value={eurValue.toString()} 
+                onChangeText={changeEurValue}
+                keyboardType={"numeric"}
+                inputStyle={{color:"white"}}
+              />
             </View>
           </View>
         </View>
