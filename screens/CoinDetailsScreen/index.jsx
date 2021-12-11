@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Dimensions, TextInput, ActivityIndicator } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import {
-  ChartDot,
-  ChartPath,
-  ChartPathProvider,
-  ChartYLabel
-} from "@rainbow-me/animated-charts";
+import { ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from "@rainbow-me/animated-charts";
 import { useRoute } from "@react-navigation/native"
 
 import HeaderCoinDetails from "./components/HeaderCoinDetails";
@@ -18,7 +13,6 @@ const CoinDetailsScreen = () => {
   const [coinMarketData, setCoinMarketData] = useState(null);
   const route = useRoute();
   const {params: {coinId}} = route;
-
   const [loading, setLoading] = useState(false);
   const [coinValue, setCoinValue] = useState("1");
   const [eurValue, setEurValue] = useState("");
@@ -63,7 +57,6 @@ const CoinDetailsScreen = () => {
     }
     return `€${parseFloat(value).toFixed(2)}`;
   };
-
   const changeCoinValue = (value) => {
     // console.warn(typeof value)
     setCoinValue(value);
@@ -97,7 +90,7 @@ const CoinDetailsScreen = () => {
               <Text style={styles.coinName}>{name}</Text>
               <ChartYLabel format={formatCurrency} style={styles.coinPrice} />
             </View>
-          
+                        
             <View style={[ styles.coinPercentage, { backgroundColor: percentageColor }, ]}>
               <AntDesign
                 name={price_change_percentage_24h < 0 ? "caretdown" : "caretup"}
