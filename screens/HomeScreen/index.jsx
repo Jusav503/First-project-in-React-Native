@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import { View, Text, FlatList, TextInput } from "react-native";
+
 import CoinItem from "../../components/CoinItem/CoinItem";
 import styles from "./styles";
 

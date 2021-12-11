@@ -11,7 +11,7 @@ const CoinItem = ({ coin }) => {
   const navigation = useNavigation()
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("Details")}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("Details", {coinId: coin.id})}>
       <View style={styles.coinName}>
         <Image style={styles.image} source={{ uri: coin.image }} />
         <View>

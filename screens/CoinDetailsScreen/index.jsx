@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, View, Dimensions, TextInput } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, Dimensions, TextInput, ActivityIndicator } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import {
   ChartDot,
@@ -7,47 +7,73 @@ import {
   ChartPathProvider,
   ChartYLabel
 } from "@rainbow-me/animated-charts";
+import { useRoute } from "@react-navigation/native"
 
-import Coin from "../../assets/data/crypto.json";
 import HeaderCoinDetails from "./components/HeaderCoinDetails";
 import styles from "./styles";
+import { getDetailCoinData, getCoinMarketChart } from "../../services/requests"
 
 const CoinDetailsScreen = () => {
+  const [coin, setCoin] = useState(null);
+  const [coinMarketData, setCoinMarketData] = useState(null);
+  const route = useRoute();
+  const {params: {coinId}} = route;
+
+  const [loading, setLoading] = useState(false);
+  const [coinValue, setCoinValue] = useState("1");
+  const [eurValue, setEurValue] = useState("");
+
+  const fetchCoinData = async() => {
+    setLoading(true);
+    const fetchedCoinData = await getDetailCoinData(coinId);
+    const fetchedCoinMarketData = await getCoinMarketChart(coinId);
+    setCoin(fetchedCoinData);
+    setCoinMarketData(fetchedCoinMarketData);
+    setEurValue(fetchedCoinData.market_data.current_price.eur.toString())
+    setLoading(false);
+  }
+  useEffect(() => {
+    fetchCoinData();
+  }, []);
+
+  if(loading || !coin || !coinMarketData){
+    return <ActivityIndicator size="large" />
+  }
+
   const {
     image: { small },
     name,
     symbol,
-    prices,
     market_data: {
       market_cap_rank,
       current_price,
       price_change_percentage_24h,
     },
-  } = Coin;
+  } = coin;
+  const { prices } = coinMarketData;
+
   const percentageColor = price_change_percentage_24h < 0 ? "#ea3943" : "#16c784";
   const WIDTH = Dimensions.get("window").width;
-  const chartColor = current_price.usd > prices[0][1] ? "#16c784" : "#ea3943";
-  const [coinValue, setCoinValue] = useState("1");
-  const [usdValue, setUsdValue] = useState(current_price.usd.toString());
+  const chartColor = current_price.eur > prices[0][1] ? "#16c784" : "#ea3943";
 
   const formatCurrency = (value) => {
     "worklet";
     if (value === "") {
-      return `$${current_price.usd.toFixed(2)}`;
+      return `€${current_price.eur.toFixed(2)}`;
     }
-    return `$${parseFloat(value).toFixed(2)}`;
+    return `€${parseFloat(value).toFixed(2)}`;
   };
 
   const changeCoinValue = (value) => {
     // console.warn(typeof value)
     setCoinValue(value);
     const floatValue = parseFloat(value.replace(',', '.' )) || 0
-    setUsdValue((floatValue * current_price.usd).toString())
+    setEurValue((floatValue * current_price.eur).toString())
   };
-  const changeUsdValue = (value) => {
-    setUsdValue(value);
+  const changeEurValue = (value) => {
+    setEurValue(value);
     const floatValue = parseFloat(value.replace(',', '.' )) || 0
-    setCoinValue((floatValue / current_price.usd).toString())
+    setCoinValue((floatValue / current_price.eur).toString())
   };
 
   return (
@@ -105,8 +131,8 @@ const CoinDetailsScreen = () => {
             </View>
           
             <View style={{flexDirection:"row", flex:1, justifyContent:"center", alignItems:"center"}}>
-              <Text style={{ color:"white" }}>USD</Text>
-              <TextInput style={styles.input} value={usdValue.toString()} keyboardType={"numeric"} onChangeText={changeUsdValue} />
+              <Text style={{ color:"white" }}>Eur</Text>
+              <TextInput style={styles.input} value={eurValue.toString()} keyboardType={"numeric"} onChangeText={changeEurValue} />
             </View>
           </View>
         </View>
