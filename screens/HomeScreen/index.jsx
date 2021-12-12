@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, TextInput } from "react-native";
 import { SearchBar } from "react-native-elements";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import CoinItem from "../../components/CoinItem/CoinItem";
 import styles from "./styles";

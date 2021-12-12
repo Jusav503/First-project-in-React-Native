@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  list: { paddingHorizontal: 10 },
+  list: { paddingHorizontal: 10, marginBottom:110 },
   title: { color: "#fff", fontSize: 20, padding: 10, fontWeight: "bold" },
   header: {
     paddingHorizontal: 10,
