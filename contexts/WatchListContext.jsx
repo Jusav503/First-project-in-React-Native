@@ -1,14 +1,50 @@
-import React, { createContext } from 'react'
-import { View, Text } from 'react-native'
+import React, { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const WatchListContext = createContext();
+const WatchlistContext = React.createContext();
+export const useWatchlist = () => React.useContext(WatchlistContext);
 
-const FavoriteList = ({children}) => {
-    return (
-        <WatchListContext.Provider>
-            {children}
-        </WatchListContext.Provider>
-    )
-}
+const WatchlistProvider = ({ children }) => {
+  const [watchlistCoinIds, setWatchlistCoinIds] = useState([]);
+  const getWatchlistData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("@watchlist_coins");
+      setWatchlistCoinIds(jsonValue != null ? JSON.parse(jsonValue) : []);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    getWatchlistData();
+  }, []);
 
-export default FavoriteList
+  const storeWatchlistCoinId = async (coinId) => {
+    try {
+      const newWatchList = [...watchlistCoinIds, coinId];
+      const jsonValue = JSON.stringify(newWatchList);
+      await AsyncStorage.setItem("@watchlist_coins", jsonValue);
+      setWatchlistCoinIds(newWatchList);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteWatchlistCoinId = async (coinId) => {
+    const newWatchList = watchlistCoinIds.filter(
+      (coinValueId) => coinValueId !== coinId
+    );
+    const jsonValue = JSON.stringify(newWatchList);
+    await AsyncStorage.setItem("@watchlist_coins", jsonValue);
+    setWatchlistCoinIds(newWatchList);
+  };
+
+  return (
+    <WatchlistContext.Provider
+      value={{ watchlistCoinIds, storeWatchlistCoinId, deleteWatchlistCoinId }}
+    >
+      {children}
+    </WatchlistContext.Provider>
+  );
+};
+
+export default WatchlistProvider;

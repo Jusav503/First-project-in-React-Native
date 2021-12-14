@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 
 import HomeScreen from "../screens/HomeScreen";
-import WatchListScreen from "../screens/WatchListScreen";
+import WatchlistScreen from "../screens/WatchlistScreen";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -29,8 +29,8 @@ const BottomTabNavigator = () => {
 
       <Tab.Screen
         name="MyList"
-        component={WatchListScreen}
-        options={{
+        component={WatchlistScreen}
+        options={{  
           tabBarIcon: ({ focused, color }) => (
             <AntDesign name={focused ? "star" : "staro"} size={focused ? 25 : 23} color={color} />
           ),
@@ -39,7 +39,7 @@ const BottomTabNavigator = () => {
 
       <Tab.Screen
         name="Profile"
-        component={WatchListScreen}
+        component={WatchlistScreen}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <FontAwesome5 name={focused ? "user-alt" : "user"} size={focused ? 24 : 20} color={color} />

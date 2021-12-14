@@ -1,12 +1,16 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { FlatList, View, Text } from "react-native";
 
-const WatchListScreen = () => {
-    return (
-        <View>
-            <Text>Hello</Text>
-        </View>
-    )
-}
+import { useWatchlist } from "../../contexts/WatchlistContext";
 
-export default WatchListScreen
+const WatchlistScreen = () => {
+  const { watchlistCoinIds } = useWatchlist();
+  console.log(watchlistCoinIds);
+  return (
+      <View>
+          <Text>Hola</Text>
+      </View>
+  );
+};
+
+export default WatchlistScreen;
