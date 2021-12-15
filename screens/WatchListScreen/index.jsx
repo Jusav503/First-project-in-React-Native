@@ -1,16 +1,47 @@
-import React from "react";
-import { FlatList, View, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
+import CoinItem from "../../components/CoinItem/CoinItem";
 
 import { useWatchlist } from "../../contexts/WatchlistContext";
+import { getWatchlistedCoins } from "../../services/requests";
 
 const WatchlistScreen = () => {
   const { watchlistCoinIds } = useWatchlist();
-  console.log(watchlistCoinIds);
+  const [coins, setCoins] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const transformCoinIds = () => watchlistCoinIds.join('%2C'); 
+
+  const fetchWatchlistedCoins = async () => {
+    if (loading){ return; }
+    setLoading(true);
+    const watchlistedCoinsData = await getWatchlistedCoins(1, transformCoinIds());
+    setCoins(watchlistedCoinsData);
+    setLoading(false);
+  };
+  useEffect(() => {
+    fetchWatchlistedCoins();
+  }, []);
+
   return (
-      <View>
-          <Text>Hola</Text>
-      </View>
+    <View style={styles.container}>
+      <FlatList
+        data={coins}
+        renderItem={({ item }) => <CoinItem coin={item} /> }
+        refreshControl={
+          <RefreshControl
+            refreshing={loading} 
+            tintColor={"white"}
+            onRefresh={fetchWatchlistedCoins}
+          />
+        }
+      />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container:{padding:10}
+})
 
 export default WatchlistScreen;
