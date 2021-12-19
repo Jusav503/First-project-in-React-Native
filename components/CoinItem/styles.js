@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     alignItems:"center"
   },
   coinName: { flexDirection: "row" },
-  image: { width: 30, height: 30, marginRight: 10 },
   rank: {                                                         
     backgroundColor: "#808080",
     color: "white",

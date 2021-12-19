@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Dimensions, TextInput, ActivityIndicator } from "react-native";
+import { Text, View, Dimensions, ActivityIndicator } from "react-native";
 import { Input } from 'react-native-elements';
 import { AntDesign } from "@expo/vector-icons";
 import { ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from "@rainbow-me/animated-charts";
 import { useRoute } from "@react-navigation/native"
 
 import HeaderCoinDetails from "./components/HeaderCoinDetails";
+import atoms from "../../components/atoms";
 import styles from "./styles";
 import { getDetailCoinData, getCoinMarketChart } from "../../services/requests"
 
@@ -32,7 +33,7 @@ const CoinDetailsScreen = () => {
   }, []);
 
   if(loading || !coin || !coinMarketData){
-    return  <ActivityIndicator size="large" color="white" style={styles.loading} />
+    return  <ActivityIndicator size="large" color="white" style={atoms.loadingScreen} />
   }
 
   const {
@@ -88,24 +89,17 @@ const CoinDetailsScreen = () => {
         <View style={{padding: 15}}>
           <View style={styles.currentPriceContent}>
             <View>
-              <Text style={styles.coinName}>{name}</Text>
-              <ChartYLabel format={formatCurrency} style={styles.coinPrice} />
+              <Text style={atoms.mediumText}>{name}</Text>
+              <ChartYLabel format={formatCurrency} style={atoms.bigNumber} />
             </View>
                         
-            <View style={[ styles.coinPercentage, { backgroundColor: percentageColor }, ]}>
+            <View style={[ atoms.coinPercentageContainer, { backgroundColor: percentageColor }, ]}>
               <AntDesign
                 name={price_change_percentage_24h < 0 ? "caretdown" : "caretup"}
                 color={"white"}
                 size={11}
               />
-              <Text
-                style={{
-                  color: "white",
-                  marginHorizontal: 5,
-                  fontSize: 20,
-                  fontWeight: "bold",
-                }}
-              >
+              <Text style={atoms.coinPercentage}>
                 {price_change_percentage_24h.toFixed(2)}%
               </Text>
             </View>

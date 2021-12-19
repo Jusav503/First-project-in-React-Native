@@ -4,6 +4,7 @@ import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 
 import HomeScreen from "../screens/HomeScreen";
 import WatchlistScreen from "../screens/WatchlistScreen";
+import PortfolioScreen from "../screens/PortfolioScreen";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -38,8 +39,8 @@ const BottomTabNavigator = () => {
       />
 
       <Tab.Screen
-        name="Profile"
-        component={WatchlistScreen}
+        name="Portfolio"
+        component={PortfolioScreen}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <FontAwesome5 name={focused ? "user-alt" : "user"} size={focused ? 24 : 20} color={color} />

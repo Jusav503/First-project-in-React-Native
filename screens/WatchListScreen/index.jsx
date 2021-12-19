@@ -10,12 +10,12 @@ const WatchlistScreen = () => {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const transformCoinIds = () => watchlistCoinIds.join('%2C'); 
+  const transformCoinIds = () => watchlistCoinIds.join("%2C");
 
   const fetchWatchlistedCoins = async () => {
-    if (loading){ return; }
+    if (loading) { return; }
     setLoading(true);
-    const watchlistedCoinsData = await getWatchlistedCoins(1, transformCoinIds());
+    const watchlistedCoinsData = await getWatchlistedCoins( 1, transformCoinIds());
     setCoins(watchlistedCoinsData);
     setLoading(false);
   };
@@ -24,13 +24,13 @@ const WatchlistScreen = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={{ padding: 10 }}>
       <FlatList
         data={coins}
-        renderItem={({ item }) => <CoinItem coin={item} /> }
+        renderItem={({ item }) => <CoinItem coin={item} />}
         refreshControl={
           <RefreshControl
-            refreshing={loading} 
+            refreshing={loading}
             tintColor={"white"}
             onRefresh={fetchWatchlistedCoins}
           />
@@ -39,9 +39,5 @@ const WatchlistScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container:{padding:10}
-})
 
 export default WatchlistScreen;
