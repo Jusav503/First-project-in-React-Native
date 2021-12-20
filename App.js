@@ -6,12 +6,12 @@ import WatchlistProvider from "./contexts/WatchlistContext";
 
 export default function App() {
   return (
-      <WatchlistProvider>
-        <View style={styles.container}>
-          <StatusBar backgroundColor="#000" />
-          <Navigation />
-        </View>
-      </WatchlistProvider>
+    <WatchlistProvider>
+      <View style={styles.container}>
+        <StatusBar backgroundColor="#000" barStyle="green" />
+        <Navigation />
+      </View>
+    </WatchlistProvider>
   );
 }
 

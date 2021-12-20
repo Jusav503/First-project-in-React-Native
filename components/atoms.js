@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 const atoms = StyleSheet.create({
   loadingScreen: {
@@ -9,12 +9,17 @@ const atoms = StyleSheet.create({
   },
 
   rowNbtw: {
-    flexDirection: "row", 
-    justifyContent: "space-between", 
-    alignItems:"center" 
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-  tcm:{color:"white"},
-  tcs:{color:"grey"},
+  rowCenter: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  tcm: { color: "white" },
+  tcs: { color: "grey" },
   smallImage: { width: 30, height: 30, marginRight: 10 },
 
   mediumText: {
@@ -26,7 +31,7 @@ const atoms = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 30,
     color: "white",
-    marginVertical:10
+    marginVertical: 10,
   },
 
   bigNumber: {

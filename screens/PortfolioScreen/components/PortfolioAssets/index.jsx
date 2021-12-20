@@ -5,8 +5,10 @@ import { AntDesign } from "@expo/vector-icons";
 import atoms from "../../../../components/atoms";
 import CustomButtom from "../../../../components/CustomButtom";
 import PortfolioAssetItem from "../PortfolioAssetItem";
+import { useNavigation } from "@react-navigation/native";
 
 const PortfolioAssets = () => {
+  const navigation = useNavigation();
   return (
     <View style={{ padding: 15 }}>
       <FlatList
@@ -36,7 +38,7 @@ const PortfolioAssets = () => {
           </>
         }
         ListFooterComponent={
-          <TouchableOpacity style={{ paddingTop: 10 }}>
+          <TouchableOpacity style={{ paddingTop: 10 }} onPress={() => navigation.navigate("NewAsset")}>
             <CustomButtom
               backgroundColor="#353535"
               FontAwesomeIcon="plus-square-o"
