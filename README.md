@@ -11,3 +11,6 @@ Using coingecko API
   <li>Easy navigation</li>
   <li>"My Favorite" screen</li>
 </ul>
+
+| :-------------------------------: | :----------------------------------------: | :----------------------------:|
+| <img src="https://github-images-jusav.s3.eu-central-1.amazonaws.com/jusavcoin.jpg" width="100" /> | <img src="https://github-images-jusav.s3.eu-central-1.amazonaws.com/jusavcoin2.jpg" width="100"/> | <img src="https://github-images-jusav.s3.eu-central-1.amazonaws.com/jusavcoin3.jpg" width="100" />
