@@ -1,19 +1,23 @@
 import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { useRecoilValue } from "recoil";
 
 import atoms from "../../../../components/atoms";
 import CustomButtom from "../../../../components/CustomButtom";
 import PortfolioAssetItem from "../PortfolioAssetItem";
-import { useNavigation } from "@react-navigation/native";
+import { allPortfolioAssets } from "../../../../atoms/PortfolioAssets";
 
 const PortfolioAssets = () => {
   const navigation = useNavigation();
+  const assets = useRecoilValue(allPortfolioAssets);
+
   return (
     <View style={{ padding: 15 }}>
       <FlatList
-        data={[{id:"btc"}]}
-        renderItem={({item}) => <PortfolioAssetItem asset={item} />}
+        data={assets}
+        renderItem={({ item }) => <PortfolioAssetItem asset={item} />}
         ListHeaderComponent={
           <>
             <View style={atoms.rowNbtw}>
@@ -38,7 +42,10 @@ const PortfolioAssets = () => {
           </>
         }
         ListFooterComponent={
-          <TouchableOpacity style={{ paddingTop: 10 }} onPress={() => navigation.navigate("NewAsset")}>
+          <TouchableOpacity
+            style={{ paddingTop: 10 }}
+            onPress={() => navigation.navigate("NewAsset")}
+          >
             <CustomButtom
               backgroundColor="#353535"
               FontAwesomeIcon="plus-square-o"

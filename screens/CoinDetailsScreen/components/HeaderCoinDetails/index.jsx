@@ -10,7 +10,7 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
-import { useWatchlist } from "../../../../contexts/WatchlistContext";
+import { useWatchlist } from "../../../../contexts/WatchListContext";
 
 const HeaderCoinDetails = (props) => {
   const { coinId, image, symbol, market_data } = props;
