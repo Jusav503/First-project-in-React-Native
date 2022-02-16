@@ -1,9 +1,8 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
+import { AntDesign } from '@expo/vector-icons'; 
 
 import atoms from "../../../../components/atoms";
-import styles from "../PortfolioAssetItem/styles";
-import { AntDesign } from '@expo/vector-icons'; 
 
 const PortfolioAssetItem = () => {
   return (

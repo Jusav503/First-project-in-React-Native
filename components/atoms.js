@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const atoms = StyleSheet.create({
+  contentCenter:{flex: 1, justifyContent:"center", alignItems:"center"},
   loadingScreen: {
     flex: 1,
     justifyContent: "center",

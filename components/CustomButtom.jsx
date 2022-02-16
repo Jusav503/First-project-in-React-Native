@@ -4,7 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 
 const CustomButtom = (props) => {
   return (
-    <View style={[styles.buttonContainer, {backgroundColor: props.backgroundColor}]}>
+    <View style={[styles.buttonContainer, {backgroundColor: props.backgroundColor, opacity: props.opacity}]}>
       <FontAwesome name={props.FontAwesomeIcon} size={24} color={props.colorIcon} />
       <Text style={[styles.buttonText, {color: props.colorTitle}]}>{props.title}</Text>
     </View>
