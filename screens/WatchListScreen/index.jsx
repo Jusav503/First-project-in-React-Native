@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
-import CoinItem from "../../components/CoinItem/CoinItem";
+import { FlatList, RefreshControl, View } from "react-native";
 
+import CoinItem from "../../components/CoinItem/CoinItem";
 import { useWatchlist } from "../../contexts/WatchListContext";
 import { getWatchlistedCoins } from "../../services/requests";
 
@@ -22,6 +22,8 @@ const WatchlistScreen = () => {
   useEffect(() => {
     fetchWatchlistedCoins();
   }, []);
+
+  console.log(coins.length);
 
   return (
     <View style={{ padding: 10 }}>

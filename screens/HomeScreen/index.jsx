@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, TextInput } from "react-native";
+import { View, Text, FlatList, TextInput, RefreshControl } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import CoinItem from "../../components/CoinItem/CoinItem";
+import { getCoins } from "../../services/requests";
 import styles from "./styles";
 
 const HomeScreen = () => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
-  const [refreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const loadData = async () => {
-    const res = await fetch(
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-    );
-    const data = await res.json();
-    setCoins(data);
+  const loadData = async (pageNumber) => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    const fetchedCoins = await getCoins(pageNumber);
+    setCoins((existingCoins) => [...existingCoins, ...fetchedCoins]);
+    setLoading(false);
+  };
+  const refetchCoins = async () => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    const fetchedCoins = await getCoins();
+    setCoins(fetchedCoins);
+    setLoading(false);
   };
   useEffect(() => {
     loadData();
@@ -44,15 +56,17 @@ const HomeScreen = () => {
             coin.name.toLowerCase().includes(search) ||
             coin.symbol.toLowerCase().includes(search)
         )}
-        refreshing={refreshing}
-        onRefresh={async () => {
-          setRefreshing(true);
-          await loadData();
-          setRefreshing(false);
-        }}
         renderItem={({ item }) => {
           return <CoinItem coin={item} />;
         }}
+        onEndReached={() => loadData(coins.length / 50 + 1)}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            tintColor="white"
+            onRefresh={refetchCoins}
+          />
+        }
       />
     </View>
   );
