@@ -1,13 +1,15 @@
 import React from "react";
+import { useColorScheme } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 
 import HomeScreen from "../screens/HomeScreen";
-import PortfolioScreen from "../screens/PortfolioScreen";
+// import PortfolioScreen from "../screens/PortfolioScreen";
 import WatchlistScreen from "../screens/WatchListScreen"
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
+  
   return (
     <Tab.Navigator
       screenOptions={{
