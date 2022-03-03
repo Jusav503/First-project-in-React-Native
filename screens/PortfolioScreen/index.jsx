@@ -11,7 +11,7 @@ const PortfolioScreen = () => {
           <Text style={{color:"white"}}>Loading please wait</Text>
         </View>}
       >
-        <PortfolioAssets />
+        {/* <PortfolioAssets /> */}
       </Suspense>
     </View>
   );

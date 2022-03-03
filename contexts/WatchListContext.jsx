@@ -6,6 +6,7 @@ export const useWatchlist = () => React.useContext(WatchlistContext);
 
 const WatchlistProvider = ({ children }) => {
   const [watchlistCoinIds, setWatchlistCoinIds] = useState([]);
+  
   const getWatchlistData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("@watchlist_coins");

@@ -40,7 +40,7 @@ const BottomTabNavigator = () => {
 
       <Tab.Screen
         name="Portfolio"
-        component={PortfolioScreen}
+        component={WatchlistScreen}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <FontAwesome5 name={focused ? "user-alt" : "user"} size={focused ? 24 : 20} color={color} />
